@@ -52,16 +52,19 @@ async def miliafk(interaction: discord.Interaction):
         vc = await channel.connect()
         afk_users[interaction.user.id] = datetime.datetime.now()
 
+        # Odmah odgovor na interaction
         await interaction.response.send_message(f"Milisav 🔥 {interaction.user.name} je sada AFK u {channel.name}!")
 
-        # Silent loop
-        while interaction.user.id in afk_users:
-            if not vc.is_playing():
-                vc.play(discord.FFmpegPCMAudio(SILENT_FILE))
-            await asyncio.sleep(10)
+        # Pokreni AFK loop u pozadinskom tasku
+        async def afk_loop():
+            while interaction.user.id in afk_users:
+                if not vc.is_playing():
+                    vc.play(discord.FFmpegPCMAudio(SILENT_FILE))
+                await asyncio.sleep(10)
+
+        asyncio.create_task(afk_loop())
     else:
         await interaction.response.send_message("Milisav 🔥 Morate biti u voice-u da biste koristili ovu komandu.")
-
 # /milileave
 @bot.tree.command(name="milileave", description="Izađi iz AFK kanala")
 async def milileave(interaction: discord.Interaction):
