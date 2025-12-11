@@ -144,12 +144,13 @@ from discord import app_commands
 psovke = [
     "Jebem ti mater sugavu",
     "Jebem li ti pomrle",
-    "Jebem li ti brata copavog bez noge"
-    "Jebem li ti mrtvog oca"
-    "Jebem li ti punca mrtvog"
-    "Jebem li ti majku cigansku bez skole"
-    "Jebem li ti ono malo mame sto imas"
-    "Popisam ti se po mrtvima"
+    "Jebem li ti brata copavog bez noge",
+    "Jebem li ti mrtvog oca",
+    "Jebem li ti punca mrtvog",
+    "Jebem li ti majku cigansku bez skole",
+    "Jebem li ti ono malo mame sto imas",
+    "Popisam ti se po mrtvima",
+    "Alah ti je jebao majku usta",
 
 ]
 
