@@ -97,5 +97,6 @@ async def kirk(ctx: discord.ApplicationContext):
     await ctx.respond(f"We are Charlie Kirk ✊ Komande: {komande}")
 
 # --- Start bota ---
-TOKEN = "OVDE_STAVI_TOKEN"
+import os
+TOKEN = os.getenv("DISCORD_TOKEN")
 bot.run(TOKEN)
