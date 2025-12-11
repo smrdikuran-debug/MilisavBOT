@@ -53,7 +53,7 @@ async def miliafk(interaction: discord.Interaction):
         afk_users[interaction.user.id] = datetime.datetime.now()
 
         # Odmah odgovor na interaction
-        await interaction.response.send_message(f"Milisav 🔥 {interaction.user.name} je sada AFK u {channel.name}!")
+        await interaction.response.send_message(f"Milisava je pozvao 🔥 {interaction.user.name} da bude AFK u kanalu {channel.name}!")
 
         # Pokreni AFK loop u pozadinskom tasku
         async def afk_loop():
@@ -85,7 +85,7 @@ async def militime(interaction: discord.Interaction):
         delta = datetime.datetime.now() - afk_users[interaction.user.id]
         await interaction.response.send_message(f"Milisav 🔥 je proveo {str(delta).split('.')[0]} u kanalu!")
     else:
-        await interaction.response.send_message("Milisav 🔥 Niste u AFK modu.")
+        await interaction.response.send_message("Milisav 🔥 Nije u AFK modu.")
 
 # /kd
 @bot.tree.command(name="kd", description="Prikaz K/D/A")
@@ -107,12 +107,12 @@ async def kd(interaction: discord.Interaction):
 @app_commands.describe(member="Kome postavljate K/D/A", kd="Format: kills/deaths/assists")
 async def setkd(interaction: discord.Interaction, member: discord.Member, kd: str):
     kds[member.id] = kd
-    await interaction.response.send_message(f"Milisav 🔥 Postavljen K/D/A za {member.name} na {kd}!")
+    await interaction.response.send_message(f"Milisav 🔥 je  postavio K/D/A za {member.name} na {kd}!")
 
 # /kojepedofil
 @bot.tree.command(name="kojepedofil", description="Tajne informacije")
 async def kojepedofil(interaction: discord.Interaction):
-    await interaction.response.send_message("👧 Milisav 🔥 Rade je pedofil")
+    await interaction.response.send_message("Milisav 🔥 misli da je Rade pedofil 👧")
 
 # /crnisok
 @bot.tree.command(name="crnisok", description="Reminder crni sok")
@@ -133,6 +133,43 @@ async def crnisok(interaction: discord.Interaction, tip: str):
 async def mili(interaction: discord.Interaction):
     komande = "/miliafk, /milileave, /militime, /kd, /setkd, /kojepedofil, /crnisok, /mili"
     await interaction.response.send_message(f"Milisav 🔥 Komande: {komande}")
+
+    # ----------------- SLASH KOMANDA /napusi -----------------
+import random
+
+import random
+from discord import app_commands
+
+# Lista psovki koja se može dopunjavati dok bot radi
+psovke = [
+    "Jebem ti mater sugavu",
+    "Jebem li ti pomrle",
+    "Jebem li ti brata copavog bez noge"
+    "Jebem li ti mrtvog oca"
+    "Jebem li ti punca mrtvog"
+    "Jebem li ti majku cigansku bez skole"
+    "Jebem li ti ono malo mame sto imas"
+    "Popisam ti se po mrtvima"
+
+]
+
+# /napusi @user
+@bot.tree.command(name="napusi", description="Nasumična psovka nekome")
+@app_commands.describe(user="Kome želite da pošaljete psovku")
+async def napusi(interaction: discord.Interaction, user: discord.Member):
+    if not psovke:
+        await interaction.response.send_message("Baza psovki je prazna")
+        return
+    izbor = random.choice(psovke)
+    await interaction.response.send_message(f"{user.mention}, {izbor}")
+
+# /dodajpsovku
+@bot.tree.command(name="dodajpsovku", description="Dodaj novu psovku u fond")
+@app_commands.describe(psovka="Tekst nove psovke")
+async def dodajpsovku(interaction: discord.Interaction, psovka: str):
+    psovke.append(psovka)
+    await interaction.response.send_message("Psovka dodata! Hvala vam sto pisate po muslimanima")
+
 
 # ----------------- START BOTA -----------------
 import os
